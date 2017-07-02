@@ -90,7 +90,7 @@ class TableRows extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td>" . parent::current(). "</td>";
+        return "<td>" . ( filter_var(parent::current(), FILTER_VALIDATE_IP) ? '<a href="http://www.ipvoid.com/scan/'.parent::current().'/">'.parent::current().'</a>' : parent::current()) . "</td>";
     }
 
     function beginChildren() { 

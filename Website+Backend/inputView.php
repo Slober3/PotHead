@@ -96,7 +96,7 @@ class TableRows extends RecursiveIteratorIterator {
 
     function current() {
     $text = wordwrap(parent::current(), 100, "\n", false);
-        return "<td>" . $text . "</td>";
+        return "<td>" . ( filter_var($text, FILTER_VALIDATE_IP) ? '<a href="http://www.ipvoid.com/scan/'.$text.'/">'.$text.'</a>' : $text) . "</td>";
     }
 
     function beginChildren() { 
