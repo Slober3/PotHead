@@ -24,7 +24,7 @@ parser.add_argument('-s',action='store', metavar='<PotHeadServer>', default='Pot
 parser.add_argument('-logDir',action='store', metavar='<logDir>', default='logs', help='log Directory')
 parser.add_argument('-motd',action='store', metavar='<motd>', default='Welcome to HMLK 612.45', help='MOTD used on this server')
 parser.add_argument('-pp',action='store', metavar='<port list>',nargs='+', help='Multiple ports')
-parser.add_argument('-site',action='store', metavar='<site>',default='http://7ol.eu/write.php', help='Server site')
+parser.add_argument('-site',action='store', metavar='<site>',default='http://7ol.eu/api/write.php', help='Server site')
 
 args = parser.parse_args()
 

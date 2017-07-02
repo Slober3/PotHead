@@ -1,0 +1,14 @@
+<Files ~ "^\.(htaccess|htpasswd)$">
+deny from all
+</Files>
+
+<Files "config.php">
+Order Allow,Deny
+Deny from all
+</Files>
+
+Options Indexes
+DirectoryIndex index.html   
+order deny,allow
+
+

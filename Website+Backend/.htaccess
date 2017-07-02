@@ -1,0 +1,6 @@
+<Files ~ "^\.(htaccess|htpasswd)$">
+deny from all
+</Files>
+
+Options Indexes
+DirectoryIndex view.php       

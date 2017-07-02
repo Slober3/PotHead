@@ -82,7 +82,7 @@
 				<tbody>
 
 <?php
-include 'config.php';
+include './includes/config.php';
 
 class TableRows extends RecursiveIteratorIterator { 
     function __construct($it) { 
@@ -120,22 +120,6 @@ catch(PDOException $e) {
 }
 $conn = null;
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -19,10 +19,10 @@
 		</div>
 		<div class="col-md-10">
 			<ul class="nav nav-tabs">
-				<li>
+				<li class="active">
 					<a href="./view.php">View</a>
 				</li>
-				<li  class="active">
+				<li>
 					<a href="./inputView.php">Input</a>
 				</li>
 				<li class="disabled">
@@ -61,8 +61,6 @@
 				<dd>
 					If you can contribute to this project please send me a PM directly.
 				</dd>
-				<dd>
-Last 30 commands/ inputs are shown here!				</dd>
 			</dl>
 			<table class="table table-hover table-condensed table-striped">
 				<thead>
@@ -77,9 +75,6 @@ Last 30 commands/ inputs are shown here!				</dd>
 							Internet Protocol address
 						</th>
 						<th>
-							Input
-						</th>
-						<th>
 							Port
 						</th>
 					</tr>
@@ -87,7 +82,7 @@ Last 30 commands/ inputs are shown here!				</dd>
 				<tbody>
 
 <?php
-include './includes/config.php';
+include 'config.php';
 
 class TableRows extends RecursiveIteratorIterator { 
     function __construct($it) { 
@@ -95,8 +90,7 @@ class TableRows extends RecursiveIteratorIterator {
     }
 
     function current() {
-    $text = wordwrap(parent::current(), 75, "<br />", true);
-        return "<td>" . ( filter_var($text, FILTER_VALIDATE_IP) ? '<a href="http://www.ipvoid.com/scan/'.$text.'/">'.$text.'</a>' : $text) . "</td>";
+        return "<td>" . ( filter_var(parent::current(), FILTER_VALIDATE_IP) ? '<a href="http://www.ipvoid.com/scan/'.parent::current().'/">'.parent::current().'</a>' : parent::current()) . "</td>";
     }
 
     function beginChildren() { 
@@ -112,7 +106,7 @@ class TableRows extends RecursiveIteratorIterator {
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT * FROM ( SELECT id, time, ip, input, port FROM loginput WHERE input IS NOT NULL AND input <> '\r\n' ORDER BY id DESC LIMIT 30 ) sub ORDER BY id ASC"); 
+    $stmt = $conn->prepare("SELECT * FROM ( SELECT id, time, ip, port FROM iplog ORDER BY id DESC LIMIT 30 ) sub ORDER BY id ASC"); 
     $stmt->execute();
 
     // set the resulting array to associative

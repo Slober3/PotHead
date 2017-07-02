@@ -87,7 +87,7 @@ Last 30 commands/ inputs are shown here!				</dd>
 				<tbody>
 
 <?php
-include './includes/config.php';
+include 'config.php';
 
 class TableRows extends RecursiveIteratorIterator { 
     function __construct($it) { 
@@ -95,7 +95,7 @@ class TableRows extends RecursiveIteratorIterator {
     }
 
     function current() {
-    $text = wordwrap(parent::current(), 75, "<br />", true);
+    $text = wordwrap(parent::current(), 100, "\n", false);
         return "<td>" . ( filter_var($text, FILTER_VALIDATE_IP) ? '<a href="http://www.ipvoid.com/scan/'.$text.'/">'.$text.'</a>' : $text) . "</td>";
     }
 
