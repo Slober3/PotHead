@@ -8,8 +8,8 @@ Magic, Well kinda you don't need super dupper knowledge to use this!
 2) Check if you got everything
 3) Upload and configure the Website and backend (Config.php & the .SQL files) 
 4) Run the python file!
-4.1) Pothead.py -pp 22 23 -site HTTP://YOURSITE/PHPFILE.PHP
-5) Profit
+5) Pothead.py -pp 22 23 -site HTTP://YOURSITE/PHPFILE.PHP
+6) Profit!
 
 ## Is this for anyone?
 Hmmmm, yes and no I would suggest you know a thing or two about PHP & Python It's a pre-release and still in early alpha stage.
