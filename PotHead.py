@@ -25,10 +25,11 @@ parser.add_argument('-logDir',action='store', metavar='<logDir>', default='logs'
 parser.add_argument('-motd',action='store', metavar='<motd>', default='Welcome to HMLK 612.45', help='MOTD used on this server')
 parser.add_argument('-pp',action='store', metavar='<port list>',nargs='+', help='Multiple ports')
 parser.add_argument('-site',action='store', metavar='<site>',default='http://7ol.eu/api/write.php', help='Server site')
+parser.add_argument('-apikey',action='store', metavar='<apiKey>',default='kwlG4R6i1ESU9d66EBRaWyYaWzJdb38n', help='your API key')
 
 args = parser.parse_args()
 
-# set the IP address, Port, ServerName variables
+# set the IP address, Port, ServerName variables 
 bind_ip = args.i
 bind_port = int(args.p)
 srvname = args.s
@@ -36,6 +37,7 @@ motd = args.motd
 logDirName = args.logDir
 multiplePorts = args.pp 
 site = args.site
+apikey = args.apikey
 
 #set Variables for Print messages
 banner = ('''
@@ -89,10 +91,10 @@ Initiate Socketserver
 #Check if multiple ports are used or a single port
 if args.pp is not None:
     print('Multiple ports used')
-    runSocketServ(socket.AF_INET, socket.SOCK_STREAM,  multiplePorts, socket.gethostname(), 5,4096,motd,1,site)
+    runSocketServ(socket.AF_INET, socket.SOCK_STREAM,  multiplePorts, socket.gethostname(), 5,4096,motd,1,site,apikey)
 else:
     print('Single port used')
-    runSocketServ(socket.AF_INET, socket.SOCK_STREAM,  bind_port, socket.gethostname(), 5,4096,motd,0,site)
+    runSocketServ(socket.AF_INET, socket.SOCK_STREAM,  bind_port, socket.gethostname(), 5,4096,motd,0,site,apikey)
 #End Phase 2 runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_max):
 
 

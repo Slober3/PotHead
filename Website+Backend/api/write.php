@@ -5,6 +5,8 @@ include '../includes/config.php';
 DO NOT EDIT ANYTHING BEYOND THIS POINT UNLESS YOU KNOW WHAT YOU'RE DOING!!!
 */
 
+
+if ($api_key==$_POST["apikey"]){
 if (isset($logfile)) {
 //Get all params
 foreach ($_POST as $param_name => $param_val) {
@@ -56,5 +58,8 @@ catch(PDOException $e)
 
 $dbh = null;
 }
-
+}
+else{
+echo 'Wrong key.';
+}
 ?>
