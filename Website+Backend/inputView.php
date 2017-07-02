@@ -19,10 +19,10 @@
 		</div>
 		<div class="col-md-10">
 			<ul class="nav nav-tabs">
-				<li class="active">
+				<li>
 					<a href="./view.php">View</a>
 				</li>
-				<li>
+				<li  class="active">
 					<a href="./inputView.php">Input</a>
 				</li>
 				<li class="disabled">
@@ -61,6 +61,8 @@
 				<dd>
 					If you can contribute to this project please send me a PM directly.
 				</dd>
+				<dd>
+Last 30 commands/ inputs are shown here!				</dd>
 			</dl>
 			<table class="table table-hover table-condensed table-striped">
 				<thead>
@@ -77,6 +79,9 @@
 						<th>
 							Port
 						</th>
+						<th>
+							Input
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -90,7 +95,8 @@ class TableRows extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td>" . parent::current(). "</td>";
+    $text = wordwrap(parent::current(), 100, "\n", false);
+        return "<td>" . $text . "</td>";
     }
 
     function beginChildren() { 
@@ -106,7 +112,7 @@ class TableRows extends RecursiveIteratorIterator {
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT * FROM ( SELECT id, time, ip, port FROM iplog ORDER BY id DESC LIMIT 30 ) sub ORDER BY id ASC"); 
+    $stmt = $conn->prepare("SELECT * FROM ( SELECT id, time, ip, input, port FROM loginput ORDER BY id DESC LIMIT 30 ) sub ORDER BY id ASC"); 
     $stmt->execute();
 
     // set the resulting array to associative

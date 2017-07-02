@@ -15,7 +15,7 @@ import _thread
 import time
 
 
-from modules.PotHeadMain import CrlogDir,prPhaseOne,prStandard,runSocketServ,logHandling
+from modules.PotHeadMain import CrlogDir,prPhaseOne,prStandard,runSocketServ
 # parse the command line arguments to set the variables for the server
 parser = argparse.ArgumentParser(description="Command line arguments")
 parser.add_argument('-i',action='store', metavar='<ip address>', default='0.0.0.0', help='The IP address to listen on default 0.0.0.0')

@@ -63,7 +63,7 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
                     # Print connection received to terminal
                     print("Got a connection from %s to %s at %s" % (str(client_address),socket_port,str(datetime.now())))
                     # Connect to Log server
-                    logHandling(str(datetime.now()),str(client_address),socket_port, site)
+                    logHandlingCon(str(datetime.now()),str(client_address),socket_port, site)
                     #Send welcome message
                     client_socket.sendto(motd.encode('ascii'),client_address)
                     client_socket.sendto('\r\nPassword: '.encode('ascii'),client_address)
@@ -89,10 +89,10 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
                                     buffer = ('%s' % (buffer)).encode('ascii')
                                     
                                 print(ready_socket.getpeername(),' : wrote : ', buffer.decode('ascii'))
+                                logHandlingInput(str(datetime.now()),ready_socket.getpeername(),socket_port, buffer.decode('ascii'), site)
                                 buffer = ''.encode('ascii')
                                 # Send another message to client
-                                ready_socket.sendall('\r\n#>: '.encode('ascii'))
-                                                        
+                                ready_socket.sendall('\r\n#>: '.encode('ascii'))                      
                         else:
                             # Client connection is lost. Handle it.
                             monitored_sockets.remove(ready_socket)
@@ -101,12 +101,20 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
                         print ("Error: Client went away! ", ready_socket.getpeername())
                         monitored_sockets.remove(ready_socket)
 
-#Write log to server
-def logHandling(time, ip, port,site):
+#Write log to server first connection
+def logHandlingCon(time, ip, port,site):
     #pf = ('Time: %s Hacker: %s On port: %s' % (time , ip, port)).encode('ascii')
     pf = urllib.parse.urlencode({'time' : time,
                          'ip'  : ip,
                          'port'    : port})
+    f = urllib.request.urlopen(site, pf.encode('ascii'))
+
+#Write log to server all input
+def logHandlingInput(time, ip, port, input, site):
+    pf = urllib.parse.urlencode({'time' : time,
+                         'ip'  : ip,
+                         'port'    : port,
+                         'input'   : input})
     f = urllib.request.urlopen(site, pf.encode('ascii'))
 
 #Start server thread   

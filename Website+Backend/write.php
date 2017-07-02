@@ -29,14 +29,24 @@ try {
     // set the PDO error mode to exception
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+if (!isset($_POST["input"])) {
 $stmt = $dbh->prepare("INSERT INTO iplog (ip, port, portHacker) VALUES (:ip, :port, :portHacker)");
 $stmt->bindParam(':ip', $ip);
 $stmt->bindParam(':port', $_POST["port"]);
 $stmt->bindParam(':portHacker', $portHacker);
-
-
     // use exec() because no results are returned
     $stmt->execute();
+}
+
+if (isset($_POST["input"])) {
+$stmt = $dbh->prepare("INSERT INTO loginput(ip, port, portHacker,input) VALUES (:ip, :port, :portHacker, :input)");
+$stmt->bindParam(':ip', $ip);
+$stmt->bindParam(':port', $_POST["port"]);
+$stmt->bindParam(':portHacker', $portHacker);
+$stmt->bindParam(':input', $_POST["input"]);
+    // use exec() because no results are returned
+    $stmt->execute();
+}
     echo "New record created successfully";
     }
 catch(PDOException $e)
