@@ -77,10 +77,10 @@ Last 30 commands/ inputs are shown here!				</dd>
 							Internet Protocol address
 						</th>
 						<th>
-							Port
+							Input
 						</th>
 						<th>
-							Input
+							Port
 						</th>
 					</tr>
 				</thead>
