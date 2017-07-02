@@ -112,7 +112,7 @@ class TableRows extends RecursiveIteratorIterator {
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT * FROM ( SELECT id, time, ip, input, port FROM loginput ORDER BY id DESC LIMIT 30 ) sub ORDER BY id ASC"); 
+    $stmt = $conn->prepare("SELECT * FROM ( SELECT id, time, ip, input, port FROM loginput WHERE input IS NOT NULL AND input <> '\r\n' ORDER BY id DESC LIMIT 30 ) sub ORDER BY id ASC"); 
     $stmt->execute();
 
     // set the resulting array to associative
