@@ -2,13 +2,12 @@
 PotHead main module
 Contains the main modules
 '''
-import argparse
 import os
 import socket
 import _thread
 import time
 import select
-import http.client, urllib.parse,urllib.request
+import urllib.parse,urllib.request
 from datetime import datetime
 
 #Check if log directory exists
@@ -17,16 +16,16 @@ def ChcklogDir(logDirName):
         return 0
     else:
         return 1
-        
-#Create Log dir        
+
+#Create Log dir
 def CrlogDir(logDirName):
     if ChcklogDir(logDirName) == 0:
         os.mkdir(logDirName)
         return 0
     else:
-        return 1  
+        return 1
 
-#Print relevant info for Phase one (servername, IP, port, information)        
+#Print relevant info for Phase one (servername, IP, port, information)
 def prPhaseOne(prSrvName,prIP,prPort,prPhOne,prSite):
     print(prSrvName)
     print(prIP)
@@ -92,7 +91,7 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
                                 logHandlingInput(str(datetime.now()),ready_socket.getpeername(),socket_port, buffer.decode('ascii'), site,apikey)
                                 buffer = ''.encode('ascii')
                                 # Send another message to client
-                                ready_socket.sendall('\r\n#>: '.encode('ascii'))                      
+                                ready_socket.sendall('\r\n#>: '.encode('ascii'))
                         else:
                             # Client connection is lost. Handle it.
                             monitored_sockets.remove(ready_socket)
@@ -119,7 +118,7 @@ def logHandlingInput(time, ip, port, input, site,apikey):
                          'apikey'  : apikey})
     f = urllib.request.urlopen(site, pf.encode('ascii'))
 
-#Start server thread   
+#Start server thread
 def runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_max, socket_buff_max,motd,mp,site,apikey):
     try:
         if mp == 1:
