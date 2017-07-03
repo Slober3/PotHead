@@ -95,8 +95,7 @@ class TableRows extends RecursiveIteratorIterator {
     }
 
     function current() {
-    $text = wordwrap(parent::current(), 75, "<br />", true);
-        return "<td>" . ( filter_var($text, FILTER_VALIDATE_IP) ? '<a href="http://www.ipvoid.com/scan/'.$text.'/">'.$text.'</a>' : $text) . "</td>";
+        return "<td>" . ( filter_var(parent::current(), FILTER_VALIDATE_IP) ? '<a href="http://www.ipvoid.com/scan/'.parent::current().'/">'.parent::current().'</a>' : wordwrap(htmlspecialchars(parent::current(), ENT_QUOTES), 75, "<br />", true)) . "</td>";
     }
 
     function beginChildren() { 
@@ -126,25 +125,6 @@ catch(PDOException $e) {
 }
 $conn = null;
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				</tbody>
 			</table>
 			
