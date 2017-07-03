@@ -5,7 +5,6 @@ Contains the main modules
 import os
 import socket
 import _thread
-import time
 import select
 import urllib.parse,urllib.request
 from datetime import datetime
@@ -130,7 +129,6 @@ def runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_m
         print ("Socket thread starting...(0)")
     except:
        print ("Error: unable to start Socket thread")
-       
     while 1:
        pass
     
