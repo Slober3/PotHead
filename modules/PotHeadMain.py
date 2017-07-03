@@ -131,5 +131,3 @@ def runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_m
        print ("Error: unable to start Socket thread")
     while 1:
        pass
-    
-
