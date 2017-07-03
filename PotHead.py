@@ -82,10 +82,10 @@ else:
 prPhaseOne(prSrvName,prIP,prPort,prPhOne,prSite)
 #End Phase 1
 
-'''
-Phase 2 Begin:
-Initiate Socketserver
-'''
+
+#Phase 2 Begin:
+#Initiate Socketserver
+
 #Check if multiple ports are used or a single port
 if args.pp is not None:
     print('Multiple ports used')
@@ -93,6 +93,5 @@ if args.pp is not None:
 else:
     print('Single port used')
     runSocketServ(socket.AF_INET, socket.SOCK_STREAM,  bind_port, socket.gethostname(), 5,4096,motd,0,site,apikey)
-#End Phase 2 runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_max):
-
+#End Phase 2
 
