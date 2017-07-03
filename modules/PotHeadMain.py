@@ -107,7 +107,7 @@ def logHandlingCon(time, ip, port,site,apikey):
                          'ip'  : ip,
                          'port'    : port,
                          'apikey'    : apikey})
-    f = urllib.request.urlopen(site, pf.encode('ascii'))
+    urllib.request.urlopen(site, pf.encode('ascii'))
 
 #Write log to server all input
 def logHandlingInput(time, ip, port, input, site,apikey):
@@ -116,7 +116,7 @@ def logHandlingInput(time, ip, port, input, site,apikey):
                          'port'    : port,
                          'input'   : input,
                          'apikey'  : apikey})
-    f = urllib.request.urlopen(site, pf.encode('ascii'))
+    urllib.request.urlopen(site, pf.encode('ascii'))
 
 #Start server thread
 def runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_max, socket_buff_max,motd,mp,site,apikey):
