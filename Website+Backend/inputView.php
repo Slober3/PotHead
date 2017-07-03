@@ -90,8 +90,8 @@ Last 30 commands/ inputs are shown here!				</dd>
 include './includes/config.php';
 
 class TableRows extends RecursiveIteratorIterator { 
-    function __construct($it) { 
-        parent::__construct($it, self::LEAVES_ONLY); 
+    function __construct($its) { 
+        parent::__construct($its, self::LEAVES_ONLY); 
     }
 
     function current() {

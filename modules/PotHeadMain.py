@@ -85,7 +85,6 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
                                     buffer.decode('ascii')
                                 except:
                                     buffer = ('%s' % (buffer)).encode('ascii')
-                                    
                                 print(ready_socket.getpeername(),' : wrote : ', buffer.decode('ascii'))
                                 logHandlingInput(str(datetime.now()),ready_socket.getpeername(),socket_port, buffer.decode('ascii'), site,apikey)
                                 buffer = ''.encode('ascii')
