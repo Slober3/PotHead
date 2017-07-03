@@ -5,7 +5,7 @@ Contains the main modules
 import argparse
 import os
 import socket
-import _thread,threading
+import _thread
 import time
 import select
 import http.client, urllib.parse,urllib.request

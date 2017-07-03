@@ -11,9 +11,6 @@ import sys
 sys.path.append('../')
 import argparse
 import socket
-import _thread
-import time
-
 
 from modules.PotHeadMain import CrlogDir,prPhaseOne,prStandard,runSocketServ
 # parse the command line arguments to set the variables for the server
@@ -29,13 +26,13 @@ parser.add_argument('-apikey',action='store', metavar='<apiKey>',default='kwlG4R
 
 args = parser.parse_args()
 
-# set the IP address, Port, ServerName variables 
+# set the IP address, Port, ServerName variables
 bind_ip = args.i
 bind_port = int(args.p)
 srvname = args.s
 motd = args.motd
 logDirName = args.logDir
-multiplePorts = args.pp 
+multiplePorts = args.pp
 site = args.site
 apikey = args.apikey
 
@@ -62,16 +59,17 @@ prIP = 'IP: {}\n'.format(bind_ip)
 prSite ='Site: {}\n'.format(site)
 motd += '\r\n'
 
-'''
-Phase 1 Begin:
-Print basic server information ip, port, servname
-Create log directory if not available
-'''
+
+# Phase 1 Begin:
+# Print basic server information ip, port, servname
+# Create log directory if not available
+
+
 print (banner)
 print(prInitPhead)
 
 # Check and Create log directory if not exist
-# the function ChcklogDir will only check
+# The function ChcklogDir will only check
 # and WILL NOT create a log directory if not exists
 
 if CrlogDir(logDirName) == 0:
