@@ -39,7 +39,6 @@ def prStandard(prSt):
 
 #Socket server and handling
 def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_max, socket_buff_max,motd, site,apikey):
-    
     srvSocket = socket.socket (socket_family, socket_type)
     srvSocket.bind((socket_host,socket_port))
     srvSocket.listen(socket_max)
@@ -110,11 +109,11 @@ def logHandlingCon(time, ip, port,site,apikey):
     urllib.request.urlopen(site, pf.encode('ascii'))
 
 #Write log to server all input
-def logHandlingInput(time, ip, port, input, site,apikey):
+def logHandlingInput(time, ip, port, usrinput, site,apikey):
     pf = urllib.parse.urlencode({'time' : time,
                          'ip'  : ip,
                          'port'    : port,
-                         'input'   : input,
+                         'input'   : usrinput,
                          'apikey'  : apikey})
     urllib.request.urlopen(site, pf.encode('ascii'))
 
@@ -123,7 +122,7 @@ def runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_m
     try:
         if mp == 1:
             print('There are ',len(socket_port)," Ports!")
-            for index in range(len(socket_port)):  
+            for index in range(len(socket_port)):
                _thread.start_new_thread( crSocketServ, (socket_family, socket_type, int(socket_port[index]), socket_host, socket_max, socket_buff_max,motd,site,apikey) )
                print(index,": port ",socket_port[index], " started!")
         else:
