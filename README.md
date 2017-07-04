@@ -20,5 +20,6 @@ It's pretty safe ;)
 
 ## Does it work?
 Yeah check it live!
-http://7ol.eu/view.php
-http://7ol.eu/inputView.php
+1) http://7ol.eu/view.php
+2) http://7ol.eu/inputView.php
+3) The new API interface: http://7ol.eu/
