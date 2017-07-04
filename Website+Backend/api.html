@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PotHead</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
+			<h2 class="text-center">
+				PotHead. Small footprint, log all connection attempts!
+			</h2>
+<br/>
+
+<div class="form-horizontal top-buffer">
+<fieldset>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ipInput">Enter IP</label>  
+  <div class="col-md-4">
+  <input id="ipInput" name="ipInput" type="text" placeholder="127.0.0.1" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="serachip">Search IP</label>
+  <div class="col-md-4">
+    <button id="serachip" name="serachip" onclick="getIP()" class="btn btn-primary">Search</button>
+  </div>
+</div>
+
+</fieldset>
+</div>
+
+
+			<table class="table table-hover table-condensed table-striped">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							Time
+						</th>
+						<th>
+							Internet Protocol address
+						</th>
+						<th>
+							Port
+						</th>
+						<th>
+							Input
+						</th>
+						<th>
+							Temp. Port
+						</th>
+					</tr>
+				</thead>
+
+			</table>
+			
+		</div>
+		<div class="col-md-1">
+		</div>
+	</div>
+</div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+
+<script>
+$.getJSON( "http://YOURSITE/api/api.php/cinput/last/45", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<tr>"+ "<td>"+val.id+"</td>" + "<td>"+val.time+"</td>"+ "<td>"+"<a href='http://www.ipvoid.com/scan/"+val.ip+"/'>"+val.ip+"</a>"+"</td>"+ "<td>"+val.port+"</td>"+ "<td>"+val.input+"</td>"+ "<td>"+val.portHacker+"</td>" + "</tr>" );
+  });
+ 
+  $( "<tbody/>", {
+    html: items.join( "" )
+  }).appendTo( "table" );
+});
+
+
+
+
+function getIP() {
+$( "tbody" ).remove();
+$.getJSON( "http://YOURSITE/api/api.php/cinput/ip/"+$('#ipInput').val(), function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<tr>"+ "<td>"+val.id+"</td>" + "<td>"+val.time+"</td>"+ "<td>"+"<a href='http://www.ipvoid.com/scan/"+val.ip+"/'>"+val.ip+"</a>"+"</td>"+ "<td>"+val.port+"</td>"+ "<td>"+val.input+"</td>"+ "<td>"+val.portHacker+"</td>" + "</tr>" );
+  });
+ 
+  $( "<tbody/>", {
+    html: items.join( "" )
+  }).appendTo( "table" );
+});
+$( "table" ).hide();
+$( "table" ).show( "slow" );
+}
+
+</script>
+
+  </body>
+</html>
