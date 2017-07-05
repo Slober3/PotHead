@@ -26,16 +26,30 @@ $ipExplodeDataArray=explode(",",$ipPostData);
 $ip=$ipExplodeDataArray[0];
 $portHacker=$ipExplodeDataArray[1];
 
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_URL, 'http://ip-api.com/json/'.$ip);
+$result = curl_exec($ch);
+curl_close($ch);
+
+$obj = json_decode($result);
+$country = $obj->country;
+$isp= $obj->isp;
+
+
 try {
     $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // set the PDO error mode to exception
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (!isset($_POST["input"])) {
-$stmt = $dbh->prepare("INSERT INTO iplog (ip, port, portHacker) VALUES (:ip, :port, :portHacker)");
+$stmt = $dbh->prepare("INSERT INTO iplog (ip, port, country, isp, portHacker) VALUES (:ip, :port, :country, :isp, :portHacker)");
 $stmt->bindParam(':ip', $ip);
 $stmt->bindParam(':port', $_POST["port"]);
 $stmt->bindParam(':portHacker', $portHacker);
+$stmt->bindParam(':country', $country);
+$stmt->bindParam(':isp', $isp);
     // use exec() because no results are returned
     $stmt->execute();
 }
