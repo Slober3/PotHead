@@ -120,13 +120,14 @@ def logHandlingInput(time, ip, port, usrinput, site,apikey):
     urllib.request.urlopen(site, pf.encode('ascii'))
 
 #Start server thread
+
 def runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_max, socket_buff_max,motd,mp,site,apikey):
     try:
         if mp == 1:
             print('There are ',len(socket_port)," Ports!")
-            for index in range(len(socket_port)):
-               _thread.start_new_thread( crSocketServ, (socket_family, socket_type, int(socket_port[index]), socket_host, socket_max, socket_buff_max,motd,site,apikey) )
-               print(index,": port ",socket_port[index], " started!")
+            for value in socket_port:
+               _thread.start_new_thread( crSocketServ, (socket_family, socket_type, int(value), socket_host, socket_max, socket_buff_max,motd,site,apikey) )
+               print("Port: ",value, " started!")
         else:
                _thread.start_new_thread( crSocketServ, (socket_family, socket_type, socket_port, socket_host, socket_max, socket_buff_max,motd,site,apikey) )
 
