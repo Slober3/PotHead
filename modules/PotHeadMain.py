@@ -53,19 +53,23 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
             )[0]
         for ready_socket in ready_to_read_sockets:
                 if ready_socket == srvSocket:
-                    # If server socket is readable, accept new client
-                    # connection.
-                    client_socket, client_address = srvSocket.accept()
-                    monitored_sockets.append(client_socket)
-                    # Print connection received to terminal
-                    print("Got a connection from %s to %s at %s" % (str(client_address),socket_port,str(datetime.now())))
-                    # Connect to Log server
-                    logHandlingCon(str(datetime.now()),str(client_address),socket_port, site,apikey)
-                    #Send welcome message
-                    client_socket.sendto(motd.encode('ascii'),client_address)
-                    client_socket.sendto('\r\nPassword: '.encode('ascii'),client_address)
-                    if ft <= 0:
-                        ft=1
+                    try:
+                        # If server socket is readable, accept new client
+                        # connection.
+                        client_socket, client_address = srvSocket.accept()
+                        monitored_sockets.append(client_socket)
+                        # Print connection received to terminal
+                        print("Got a connection from %s to %s at %s" % (str(client_address),socket_port,str(datetime.now())))
+                        # Connect to Log server
+                        logHandlingCon(str(datetime.now()),str(client_address),socket_port, site,apikey)
+                        #Send welcome message
+                        client_socket.sendto(motd.encode('ascii'),client_address)
+                        client_socket.sendto('\r\nPassword: '.encode('ascii'),client_address)
+                        if ft <= 0:
+                            ft=1
+                    except:
+                        print ("Error: Client went away! ", str(client_address))
+                        monitored_sockets.remove(ready_socket)
 
                 else:
                     try:
