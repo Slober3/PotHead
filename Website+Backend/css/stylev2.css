@@ -29,9 +29,9 @@ padding: 25px;
 margin: 20px;
 }
 
-/*body { background: #D3D3D3 !important; }*/
+/*body { background: #D3D3D3; }*/
 
-.back { background: white !important; }
+.back { background: white; }
 
 /*	
 	Side Navigation Menu V2, RWD
