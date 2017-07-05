@@ -59,7 +59,7 @@ We are still searching brainstormers, users who would like to help and guys who 
 ## Contact
 1) Hackforums username: slober
 
-2) email pothead@7ol.eu
+2) Email: pothead@7ol.eu
 
 
 ## License
