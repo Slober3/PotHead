@@ -5,5 +5,3 @@ deny from all
 Options Indexes
 DirectoryIndex index.html   
 
-
-
