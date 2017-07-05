@@ -1,4 +1,7 @@
 # PotHead
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0b8eb57599e4631be1e889b72156fd1)](https://www.codacy.com/app/quintendesmyter/PotHead?utm_source=github.com&utm_medium=referral&utm_content=Slober3/PotHead&utm_campaign=badger)
+
 ## What is it?
 Pothead: A simple lightweight packet for creating a minimal interaction honeypot
 
