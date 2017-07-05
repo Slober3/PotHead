@@ -5,7 +5,6 @@ Pothead: A simple lightweight packet for creating a minimal interaction honeypot
 ## How does it work?
 Magic, Well kinda you don't need super dupper knowledge to use this!
 Oops the magic failed ;) a really nice INSTALL.md will be written unfortunately it's not yet available.
-
 1) Download all the files 
 
 2) Check if you got everything
@@ -31,10 +30,9 @@ It's pretty safe ;)
 
 ## Does it work?
 Yeah check it live!
+1) View the last few connections (_OLD): http://7ol.eu/view.php
 
-1) http://7ol.eu/view.php
-
-2) http://7ol.eu/inputView.php
+2) View the last few inputs (_OLD): http://7ol.eu/inputView.php
 
 3) The new API interface: http://7ol.eu/
 
