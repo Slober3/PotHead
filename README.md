@@ -1,4 +1,5 @@
 # PotHead
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0ae093f1196d4b6eb9d7a4d7a0aa9e07)](https://www.codacy.com/app/quintendesmyter/PotHead?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Slober3/PotHead&amp;utm_campaign=Badge_Grade)
 
 ## What is it?
