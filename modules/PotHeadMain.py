@@ -68,8 +68,7 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
                         if ft <= 0:
                             ft=1
                     except:
-                        print ("Error: Client went away! ", str(client_address))
-                        monitored_sockets.remove(ready_socket)
+                        print ("Error: Client went away! [0]", str(client_address))
 
                 else:
                     try:
