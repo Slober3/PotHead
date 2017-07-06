@@ -53,23 +53,22 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
             )[0]
         for ready_socket in ready_to_read_sockets:
                 if ready_socket == srvSocket:
+                    # If server socket is readable, accept new client
+                    # connection.
+                    client_socket, client_address = srvSocket.accept()
+                    monitored_sockets.append(client_socket)
+                    # Print connection received to terminal
+                    print("Got a connection from %s to %s at %s" % (str(client_address),socket_port,str(datetime.now())))
+                    # Connect to Log server
+                    logHandlingCon(str(datetime.now()),str(client_address),socket_port, site,apikey)
+                    #Send welcome message
                     try:
-                        # If server socket is readable, accept new client
-                        # connection.
-                        client_socket, client_address = srvSocket.accept()
-                        monitored_sockets.append(client_socket)
-                        # Print connection received to terminal
-                        print("Got a connection from %s to %s at %s" % (str(client_address),socket_port,str(datetime.now())))
-                        # Connect to Log server
-                        logHandlingCon(str(datetime.now()),str(client_address),socket_port, site,apikey)
-                        #Send welcome message
                         client_socket.sendto(motd.encode('ascii'),client_address)
                         client_socket.sendto('\r\nPassword: '.encode('ascii'),client_address)
-                        if ft <= 0:
-                            ft=1
                     except:
                         print ("Error: Client went away! [0]", str(client_address))
-
+                    if ft <= 0:
+                        ft=1
                 else:
                     try:
                         message = ready_socket.recv(socket_buff_max)
@@ -102,13 +101,14 @@ def crSocketServ(socket_family, socket_type, socket_port, socket_host, socket_ma
 
 #Write log to server first connection
 def logHandlingCon(time, ip, port,site,apikey):
-    #pf = ('Time: %s Hacker: %s On port: %s' % (time , ip, port)).encode('ascii')
     pf = urllib.parse.urlencode({'time' : time,
                          'ip'  : ip,
                          'port'    : port,
                          'apikey'    : apikey})
-    urllib.request.urlopen(site, pf.encode('ascii'))
-
+    try:
+        urllib.request.urlopen(site, pf.encode('ascii'))
+    except:
+        print ("WEBSITE Error: While posting Logs! ")
 #Write log to server all input
 def logHandlingInput(time, ip, port, usrinput, site,apikey):
     pf = urllib.parse.urlencode({'time' : time,
@@ -116,8 +116,10 @@ def logHandlingInput(time, ip, port, usrinput, site,apikey):
                          'port'    : port,
                          'input'   : usrinput,
                          'apikey'  : apikey})
-    urllib.request.urlopen(site, pf.encode('ascii'))
-
+    try:
+        urllib.request.urlopen(site, pf.encode('ascii'))
+    except:
+        print ("WEBSITE Error: While posting Logs! ")
 #Start server thread
 
 def runSocketServ(socket_family, socket_type, socket_port, socket_host, socket_max, socket_buff_max,motd,mp,site,apikey):
